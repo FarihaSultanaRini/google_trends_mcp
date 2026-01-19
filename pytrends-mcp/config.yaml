@@ -1,0 +1,10 @@
+/msecurity:
+  master_security_lock: true
+  allow_destructive_actions: false
+
+google_trends:
+  default_region: "US"
+  default_timeframe_days: 1
+
+tools:
+  fetch_trending_keywords: true

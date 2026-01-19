@@ -1,0 +1,4 @@
+mcp
+pytrends
+pandas
+pyyaml

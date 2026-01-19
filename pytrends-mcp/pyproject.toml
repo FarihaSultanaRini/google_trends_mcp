@@ -1,0 +1,18 @@
+[project]
+name = "google-trends-mcp"
+version = "0.1.0"
+description = "MCP server for Google Trends"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp",
+    "pytrends",
+    "pandas",
+    "pyyaml"
+]
+
+[project.scripts]
+google-trends-mcp = "google_trends_mcp.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
