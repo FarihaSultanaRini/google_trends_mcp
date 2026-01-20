@@ -1,0 +1,10 @@
+{
+    "project": {
+        "name": "google-trends-mcp",
+        "version": "0.1.0"
+    },
+    "source": {
+        "path": "src/google_trends_mcp/server.py",
+        "entrypoint": "mcp"
+    }
+}
