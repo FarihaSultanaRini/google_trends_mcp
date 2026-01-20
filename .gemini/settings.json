@@ -1,10 +1,15 @@
 {
   "mcpServers": {
-    "gtrends-mcp-server": {
+    "google-trends-mcp": {
       "command": "python",
       "args": [
-        "G:/pytrends/google_trends_mcp/src/google_trends_mcp/server.py"
-      ]
+        "-m",
+        "google_trends_mcp.cli",
+        "run"
+      ],
+      "env": {
+        "PYTHONPATH": "G:/pytrends/google_trends_mcp/src"
+      }
     }
   }
 }
