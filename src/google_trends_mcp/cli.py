@@ -69,7 +69,7 @@ def install_server(custom_path: Optional[str] = None):
 def run_server():
     """Run the FastMCP server."""
     # Import here to avoid import errors during installation if dependencies aren't ready
-    from .server import mcp
+    from google_trends_mcp.server import mcp
     mcp.run()
 
 def main():
