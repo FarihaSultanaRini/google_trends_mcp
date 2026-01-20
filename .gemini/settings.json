@@ -3,9 +3,8 @@
     "gtrends-mcp-server": {
       "command": "python",
       "args": [
-        "G:/google_trends/pytrends-mcp/src/server.py"
+        "G:/pytrends/google_trends_mcp/src/google_trends_mcp/server.py"
       ]
     }
-    
   }
 }
