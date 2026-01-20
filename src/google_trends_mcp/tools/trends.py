@@ -1,5 +1,5 @@
 from pytrends.request import TrendReq
-from ..config import config
+from google_trends_mcp.config import config
 
 def get_related_queries_logic(keyword: str, geo: str = None, timeframe_str: str = None):
     """
