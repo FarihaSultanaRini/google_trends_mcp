@@ -44,5 +44,11 @@ def fetch_trending_keywords_tool(keyword: str, region: str = None, days: int = N
     timeframe = f'now {days_val}-d' if days_val <= 7 else f'today {days_val//30}-m'
     if days_val == 0: timeframe = 'now 1-H'
 
-    data = get_related_queries_logic(keyword, geo=region, timeframe_str=timeframe)
-    return str(data)
+    try:
+        data = get_related_queries_logic(keyword, geo=region, timeframe_str=timeframe)
+        return str(data)
+    except Exception as e:
+        if "429" in str(e):
+            return "Google Trends API Rate Limit reached (429). Please try again in 1-2 minutes. Retries were attempted but Google is still throttling requests."
+        return f"Error executing tool fetch_trending_keywords: {str(e)}"
+
