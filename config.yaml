@@ -1,4 +1,4 @@
-/msecurity:
+security:
   master_security_lock: true
   allow_destructive_actions: false
 
