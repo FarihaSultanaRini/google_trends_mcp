@@ -4,7 +4,7 @@
         "version": "0.1.0"
     },
     "source": {
-        "path": "src/google_trends_mcp/server.py",
+        "path": "main.py",
         "entrypoint": "mcp"
     }
 }
