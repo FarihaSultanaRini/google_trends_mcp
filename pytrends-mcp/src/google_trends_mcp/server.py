@@ -1,5 +1,5 @@
 from mcp.server.fastmcp import FastMCP
-from .tools.trends import fetch_trending_keywords_tool
+from google_trends_mcp.tools.trends import fetch_trending_keywords_tool
 
 mcp = FastMCP("google-trends")
 
