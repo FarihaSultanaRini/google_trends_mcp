@@ -1,26 +1,39 @@
+import time
+import random
 from pytrends.request import TrendReq
 from google_trends_mcp.config import config
 
-def get_related_queries_logic(keyword: str, geo: str = None, timeframe_str: str = None):
+def get_related_queries_logic(keyword: str, geo: str = None, timeframe_str: str = None, max_retries: int = 3):
     """
-    Core logic for fetching related queries.
+    Core logic for fetching related queries with retry handling for 429.
     """
     region = geo or config.get('default_region', 'US')
     
     # pytrends.request.TrendReq expects hl='en-US', tz=360 by default in this context
     pytrends = TrendReq(hl='en-US', tz=360)
-    pytrends.build_payload([keyword], geo=region, timeframe=timeframe_str)
     
-    related_queries = pytrends.related_queries()
-    
-    if keyword in related_queries:
-        top_queries = related_queries[keyword]['top']
-        rising_queries = related_queries[keyword]['rising']
-        return {
-            "top": top_queries.to_dict(orient='records') if top_queries is not None else [],
-            "rising": rising_queries.to_dict(orient='records') if rising_queries is not None else []
-        }
-    return {"top": [], "rising": []}
+    for attempt in range(max_retries):
+        try:
+            pytrends.build_payload([keyword], geo=region, timeframe=timeframe_str)
+            related_queries = pytrends.related_queries()
+            
+            if keyword in related_queries:
+                top_queries = related_queries[keyword]['top']
+                rising_queries = related_queries[keyword]['rising']
+                return {
+                    "top": top_queries.to_dict(orient='records') if top_queries is not None else [],
+                    "rising": rising_queries.to_dict(orient='records') if rising_queries is not None else []
+                }
+            return {"top": [], "rising": []}
+            
+        except Exception as e:
+            if "429" in str(e) and attempt < max_retries - 1:
+                wait_time = (2 ** attempt) + random.random()
+                print(f"Rate limited (429). Retrying in {wait_time:.2f} seconds...")
+                time.sleep(wait_time)
+                continue
+            raise e
+
 
 def fetch_trending_keywords_tool(keyword: str, region: str = None, days: int = None) -> str:
     """
