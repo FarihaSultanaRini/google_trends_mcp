@@ -1,7 +1,7 @@
 {
   "mcpServers": {
-    "google-trends-mcp": {
-      "command": "python",
+    "pytrends-server": {
+      "command": "C:/Users/User/AppData/Local/Microsoft/WindowsApps/python.exe",
       "args": [
         "-m",
         "google_trends_mcp.cli",
